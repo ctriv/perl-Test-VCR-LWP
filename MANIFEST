@@ -3,6 +3,6 @@ lib/Test/VCR/LWP.pm
 LICENSE
 Makefile.PL
 MANIFEST
-README
+README.pod
 t/001_load.t
 t/002_vcr.t

@@ -1,7 +1,0 @@
-MANIFEST
-README
-LICENSE
-Changes
-Makefile.PL
-lib/Test/VCR/LWP.pm
-t/001_load.t
