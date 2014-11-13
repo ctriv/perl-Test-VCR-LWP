@@ -186,12 +186,15 @@ describe "A test recorder" => sub {
 			
 			cmp_deeply(
 				\%sent_args,
-				{ tape => 'foo.tape'},
-			);	
+				{ tape => re(qr:t/foo\.tape$:) },
+			);
+			
+			unlink($sent_args{tape});
 		};
 	};
 };
 
 
+END { unlink 'foo.tape' }
 
 runtests unless caller;

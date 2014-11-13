@@ -5,6 +5,8 @@ use warnings;
 
 use LWP::UserAgent;
 use Data::Dumper;
+use FindBin;
+use File::Spec;
 
 use base 'Exporter';
 our @EXPORT_OK = qw(withVCR);
@@ -221,7 +223,7 @@ sub withVCR (&;@) {
 	$args{tape} ||= do {
 		my $caller = (caller(1))[3];
 		$caller =~ s/^.*:://;
-		"$caller.tape";
+		File::Spec->catfile($FindBin::Bin, "$caller.tape");
 	};
 	
 	my $vcr = Test::VCR::LWP->new(%args);
