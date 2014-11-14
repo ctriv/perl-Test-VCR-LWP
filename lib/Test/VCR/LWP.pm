@@ -231,13 +231,14 @@ sub withVCR (&;@) {
 }
 
 
-=head1 AUTHOR
+=head1 AUTHORS
 
     Chris Reinhardt
-    CPAN ID: CREIN
-    Liquid Web Inc.
-    perl-cpan@triv.org
+    crein@cpan.org
 
+    Mark Ng
+    cpan@markng.co.uk   
+    
 =head1 COPYRIGHT
 
 This program is free software; you can redistribute
