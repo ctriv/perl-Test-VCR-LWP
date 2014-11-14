@@ -230,6 +230,15 @@ sub withVCR (&;@) {
 	$vcr->run($code);
 }
 
+=head1 TODO
+
+=over 2
+
+=item *
+
+The docs are pretty middling at the moment.
+
+=back
 
 =head1 AUTHORS
 
