@@ -258,7 +258,7 @@ LICENSE file included with this module.
 
 =head1 SEE ALSO
 
-L<LWP::UserAgent>, perl(1).
+L<LWP::UserAgent>, perl(1)
 
 =cut
 
