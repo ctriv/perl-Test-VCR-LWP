@@ -10,7 +10,7 @@ use File::Spec;
 
 use base 'Exporter';
 our @EXPORT_OK = qw(withVCR);
-our $VERSION   = '0.1';
+our $VERSION   = '0.2';
 
 =head1 NAME
 
