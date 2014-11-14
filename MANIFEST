@@ -4,6 +4,6 @@ LICENSE
 Makefile.PL
 MANIFEST
 MANIFEST.SKIP
-README.pod
+README
 t/001_load.t
 t/002_vcr.t
