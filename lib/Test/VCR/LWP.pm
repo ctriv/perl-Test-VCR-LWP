@@ -193,7 +193,7 @@ a code ref.  For example:
 		my $req = $ua->post('http://oo.com/object');
 		isa_ok($req, 'HTTP::Response');
 		
-		if ($_->isRecording) {
+		if ($_->is_recording) {
 			sleep(5);
 		}
 		
