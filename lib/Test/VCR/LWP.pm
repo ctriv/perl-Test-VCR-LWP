@@ -101,7 +101,10 @@ sub record {
 	};
 	
 	local $_ = $self;
-	$code->();
+	eval {
+		$code->();
+	};
+	my $e = $@;
 	
 	open(my $fh, '>', $self->{tape}) || die "Couldn't open $self->{tape}: $!\n";
 	
@@ -110,6 +113,8 @@ sub record {
 	print $fh "use HTTP::Request;\n";
 	print $fh Data::Dumper::Dumper($tape), "\n";
 	close($fh) || die "Couldn't close $self->{tape}: $!\n";
+
+	die $e if $e;
 }
 
 sub play {

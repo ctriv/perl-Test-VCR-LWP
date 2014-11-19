@@ -69,6 +69,25 @@ describe "A test recorder" => sub {
 			});
 			file_contents_like('test.tape', qr/cpan/i);				
 		};
+		it "should record if an exception is thrown" => sub {
+			eval {
+				$sut->run(sub {
+					$ua->get('http://search.cpan.org');
+					die "Exception!\n";
+				});
+			};
+			file_contents_like('test.tape', qr/cpan/i);
+		};
+		it "should rethrow exceptions" => sub {
+			eval {
+				$sut->run(sub {
+					$ua->get('http://search.cpan.org');
+					die "Exception!\n";
+				});
+			};
+			my $e = $@;
+			is($e, "Exception!\n");
+		};
 		it "should record multiple things" => sub {
 			$sut->run(sub {
 				$ua->get('http://www.apple.com');
