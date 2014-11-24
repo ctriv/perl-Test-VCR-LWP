@@ -23,14 +23,14 @@ WriteMakefile(
 			'Mark Ng <cpan@markng.co.uk>',
 		],
 		resources   => {
-			homepage    => 'https://github.com/creinhardt/perl-Test-VCR-LWP',
+			homepage    => 'https://github.com/ctriv/perl-Test-VCR-LWP',
 			bugtracker  => {
-				web    => 'https://github.com/creinhardt/perl-Test-VCR-LWP/issues',
+				web    => 'https://github.com/ctriv/perl-Test-VCR-LWP/issues',
 			},
 			repository  => {
 				type => 'git',
-				url  => 'https://github.com/creinhardt/perl-Test-VCR-LWP.git',
-				web  => 'https://github.com/creinhardt/perl-Test-VCR-LWP',
+				url  => 'https://github.com/ctriv/perl-Test-VCR-LWP.git',
+				web  => 'https://github.com/ctriv/perl-Test-VCR-LWP',
 			},
 		},
 	},
