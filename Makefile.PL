@@ -1,20 +1,10 @@
 use ExtUtils::MakeMaker;
 
-WriteMakefile(
+my %MakeFile = (
 	NAME         => 'Test::VCR::LWP',
 	VERSION_FROM => 'lib/Test/VCR/LWP.pm', 
 	AUTHOR       => 'Chris Reinhardt (crein@cpan.org)',
 	ABSTRACT     => 'Record and playback LWP interactions.',
-	PREREQ_PM    => {
-		'LWP::UserAgent'       => 0,
-	},
-	TEST_REQUIRES => {
-		'Test::More'           => 0,
-		'Test::File::Contents' => 0,
-		'Test::Spec'           => 0,
-		'Test::Deep'           => 0,
-		'Sub::Name'            => 0,
-	},
 	clean => { files => 't/*.tape *.tape' },
 	LICENSE => 'perl',
 	META_MERGE => {
@@ -36,3 +26,28 @@ WriteMakefile(
 	},
 );
 
+my %test_depends = (
+	'Test::More'           => 0,
+	'Test::File::Contents' => 0,
+	'Test::Spec'           => 0,
+	'Test::Deep'           => 0,
+	'Sub::Name'            => 0,
+);
+
+my %depends = (
+	'LWP::UserAgent'       => 0,
+);
+
+if (eval { ExtUtils::MakeMaker->VERSION(6.64) }) {
+	$MakeFile{TEST_REQUIRES} = \%test_depends;
+	$MakeFile{PREREQ_PM}     = \%depends;
+} else {
+	$MakeFile{PREREQ_PM} = {
+		%test_depends,
+		%depends
+	};
+}
+
+
+WriteMakefile(%MakeFile);
+	
