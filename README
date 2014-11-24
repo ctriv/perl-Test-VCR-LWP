@@ -1,9 +1,6 @@
 NAME
     Test::VCR::LWP - Record and playback LWP interactions.
 
-VERSION
-    version 0.1
-
 SYNOPSIS
             withVCR {
                     my $res = $useragent->get('http://metacpan.org/');

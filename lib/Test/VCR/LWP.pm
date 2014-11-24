@@ -16,10 +16,6 @@ our $VERSION   = '0.3';
 
 Test::VCR::LWP - Record and playback LWP interactions.
 
-=head1 VERSION
-
-version 0.1
-
 =head1 SYNOPSIS
 
 	withVCR {
