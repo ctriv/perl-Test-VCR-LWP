@@ -7,6 +7,7 @@ use Test::Spec;
 use Test::More;
 use Test::File::Contents;
 use Test::VCR::LWP qw(withVCR);
+use Test::Exception;
 use LWP::UserAgent;
 use Sub::Name;
 use File::Spec;
@@ -212,6 +213,11 @@ describe "A test recorder" => sub {
 			
 			unlink($sent_args{tape});
 		};
+		it "should throw an exception if given no tape name and called from an anonymous sub" => sub {
+			dies_ok {
+				withVCR { };
+			};
+		}
 	};
 };
 

@@ -31,6 +31,7 @@ my %test_depends = (
 	'Test::File::Contents' => 0,
 	'Test::Spec'           => 0,
 	'Test::Deep'           => 0,
+	'Test::Exception'      => 0,
 	'Sub::Name'            => 0,
 );
 

@@ -7,6 +7,7 @@ use LWP::UserAgent;
 use Data::Dumper;
 use FindBin;
 use File::Spec;
+use Carp;
 
 use base 'Exporter';
 our @EXPORT_OK = qw(withVCR);
@@ -224,6 +225,11 @@ sub withVCR (&;@) {
 	$args{tape} ||= do {
 		my $caller = (caller(1))[3];
 		$caller =~ s/^.*:://;
+		
+		if ($caller eq '__ANON__') {
+			croak "tape name must be supplied if called from anonymous subroutine"
+		}
+		
 		File::Spec->catfile($FindBin::Bin, "$caller.tape");
 	};
 	
