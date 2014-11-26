@@ -49,6 +49,7 @@ a code ref.  For example:
 		}
 		
 		my $second = $ua->get('http://oo.com/object/' . $res->id);
+		
 	} tape => 'my_test.tape';
 
 Or to have the name of the calling sub define the tape name:
@@ -57,13 +58,27 @@ Or to have the name of the calling sub define the tape name:
 		my $req = $ua->post('http://oo.com/object');
 		isa_ok($req, 'HTTP::Response');
 	};
-
+	
 The tape file we be placed in the same directory as the script if no tape
 argument is given.  If this function is called outside of a subroutine, the
 filename of the current perl script will be used to derive a tape filename.
 
 Within the code block, $_ is the current vcr object.  The C<is_recording> method
 might be useful.
+
+=head2 withoutVCR
+
+Allows a section of a withVCR code block to skip recording.
+
+	withVCR {
+		my $req = $ua->post('http://oo.com/object');
+		isa_ok($req, 'HTTP::Response');
+		
+		withoutVCR {
+			# this will not end up in the tape
+			$ua->post('http://always.com/dothis');
+		};
+	};
 
 =head1 TODO
 

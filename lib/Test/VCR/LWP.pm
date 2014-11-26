@@ -11,7 +11,7 @@ use Carp;
 
 use base 'Exporter';
 our @EXPORT_OK = qw(withVCR withoutVCR);
-our $VERSION   = '0.3';
+our $VERSION   = '0.4';
 our $__current_vcr;
 
 =head1 NAME
