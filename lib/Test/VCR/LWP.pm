@@ -88,7 +88,7 @@ sub record {
 		my ($ua, $req) = @_;
 		local *LWP::UserAgent::request = $original_lwp_request;
 		
-		diag("recording http response for " . $req->uri);
+		diag("recording http response for %s %s", $req->method, $req->uri);
 		
 		my $res = $original_lwp_request->($ua, $req);
 		
@@ -137,7 +137,7 @@ sub play {
 				next REQ if $recorded->uri->$field ne $incoming->uri->$field;
 			}
 			
-			diag("returning recorded http response for " . $incoming->uri);
+			diag("returning recorded http response for %s %s", $incoming->method, $incoming->uri);
 			return $episode->{response};
 		}
 		
@@ -180,8 +180,11 @@ sub _load_tape {
 }
 
 sub diag {
-	if ($ENV{VCR_DEBUG}) {
-		warn "# @_\n";
+	my ($format, @args) = @_;
+	
+	if ($ENV{VCR_DEBUG}) {	
+		my $msg = sprintf($format, @args);
+		warn "# $msg\n";
 	}
 }
 
