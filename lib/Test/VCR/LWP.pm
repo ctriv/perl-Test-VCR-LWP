@@ -10,8 +10,9 @@ use File::Spec;
 use Carp;
 
 use base 'Exporter';
-our @EXPORT_OK = qw(withVCR);
+our @EXPORT_OK = qw(withVCR withoutVCR);
 our $VERSION   = '0.3';
+our $__current_vcr;
 
 =head1 NAME
 
@@ -92,7 +93,10 @@ sub record {
 		
 		my $res = $original_lwp_request->($ua, $req);
 		
-		push(@$tape, {request => $req, response => $res});
+		# skip recording is often set by the withoutVCR function
+		unless ($self->{skip_recording}) {
+			push(@$tape, {request => $req, response => $res});
+		}
 		
 		return $res;
 	};
@@ -203,6 +207,7 @@ a code ref.  For example:
 		}
 		
 		my $second = $ua->get('http://oo.com/object/' . $res->id);
+		
 	} tape => 'my_test.tape';
 
 Or to have the name of the calling sub define the tape name:
@@ -211,7 +216,7 @@ Or to have the name of the calling sub define the tape name:
 		my $req = $ua->post('http://oo.com/object');
 		isa_ok($req, 'HTTP::Response');
 	};
-
+	
 The tape file we be placed in the same directory as the script if no tape
 argument is given.  If this function is called outside of a subroutine, the
 filename of the current perl script will be used to derive a tape filename.
@@ -237,7 +242,36 @@ sub withVCR (&;@) {
 	};
 	
 	my $vcr = Test::VCR::LWP->new(%args);
+	# this is so withoutVCR can get to the current vcr object.
+	local $__current_vcr = $vcr;
 	$vcr->run($code);
+}
+
+=head2 withoutVCR
+
+Allows a section of a withVCR code block to skip recording.
+
+	withVCR {
+		my $req = $ua->post('http://oo.com/object');
+		isa_ok($req, 'HTTP::Response');
+		
+		withoutVCR {
+			# this will not end up in the tape
+			$ua->post('http://always.com/dothis');
+		};
+	};
+
+=cut
+
+sub withoutVCR (&;@) {
+	my $code = shift;
+	my %args = @_;
+	
+	if (!$__current_vcr) {
+		croak "Using withoutVCR outside of a withVCR. You probably don't want to do this.";
+	}
+	local $__current_vcr->{skip_recording} = 1;
+ 	$code->();
 }
 
 =head1 TODO
