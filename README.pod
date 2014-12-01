@@ -63,8 +63,8 @@ The tape file we be placed in the same directory as the script if no tape
 argument is given.  If this function is called outside of a subroutine, the
 filename of the current perl script will be used to derive a tape filename.
 
-Within the code block, $_ is the current vcr object.  The C<is_recording> method
-might be useful.
+Within the code block, C<$_> is the current vcr object.  The C<is_recording>
+method might be useful.
 
 =head2 withoutVCR
 

@@ -10,7 +10,7 @@ DESCRIPTION
     Records HTTP transactions done thru LWP to a file and then replays them.
     Allows your tests suite to be fast, dterministic and accurate.
 
-    Inspired by (stolen from) http://relishapp.com/vcr/vcr/docs
+    Inspired by (stolen from) <http://relishapp.com/vcr/vcr/docs>
 
 OO Interface
     You can use the object oriented interface, but the basic decorator style
@@ -28,7 +28,7 @@ OO Interface
                             do_something();
                     }
             });
-        
+
   withVCR
     Mocks out any calls to LWP::UserAgent with Test::VCR::LWP. Takes a
     number of flags which are passed to the VCR constructor, and finally a
@@ -52,13 +52,13 @@ OO Interface
                     my $req = $ua->post('http://oo.com/object');
                     isa_ok($req, 'HTTP::Response');
             };
-        
+
     The tape file we be placed in the same directory as the script if no
     tape argument is given. If this function is called outside of a
     subroutine, the filename of the current perl script will be used to
     derive a tape filename.
 
-    Within the code block, $_ is the current vcr object. The `is_recording'
+    Within the code block, $_ is the current vcr object. The "is_recording"
     method might be useful.
 
   withoutVCR
@@ -82,8 +82,8 @@ AUTHORS
         crein@cpan.org
 
         Mark Ng
-        cpan@markng.co.uk   
-    
+        cpan@markng.co.uk
+
 COPYRIGHT
     This program is free software; you can redistribute it and/or modify it
     under the same terms as Perl itself.
