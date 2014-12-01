@@ -85,17 +85,20 @@ sub record {
 	my $tape = $self->_load_tape;
 	
 	no warnings 'redefine';
+	
 	local *LWP::UserAgent::request = sub {
 		my ($ua, $req) = @_;
 		local *LWP::UserAgent::request = $original_lwp_request;
-		
-		diag("recording http response for %s %s", $req->method, $req->uri);
 		
 		my $res = $original_lwp_request->($ua, $req);
 		
 		# skip recording is often set by the withoutVCR function
 		unless ($self->{skip_recording}) {
+			diag("recording http response for %s %s", $req->method, $req->uri);
 			push(@$tape, {request => $req, response => $res});
+		}
+		else {
+			diag("Not recording (within a withoutVCR block).");
 		}
 		
 		return $res;
@@ -242,6 +245,7 @@ sub withVCR (&;@) {
 	};
 	
 	my $vcr = Test::VCR::LWP->new(%args);
+	diag("Created $vcr");
 	# this is so withoutVCR can get to the current vcr object.
 	local $__current_vcr = $vcr;
 	$vcr->run($code);
@@ -270,7 +274,9 @@ sub withoutVCR (&;@) {
 	if (!$__current_vcr) {
 		croak "Using withoutVCR outside of a withVCR. You probably don't want to do this.";
 	}
+	
 	local $__current_vcr->{skip_recording} = 1;
+	diag("Setting skip in $__current_vcr");
  	$code->();
 }
 
