@@ -11,7 +11,6 @@ use Carp;
 
 use base 'Exporter';
 our @EXPORT_OK = qw(withVCR withoutVCR);
-our $VERSION   = '0.4';
 our $__current_vcr;
 
 =head1 NAME
@@ -267,9 +266,8 @@ Allows a section of a withVCR code block to skip recording.
 
 =cut
 
-sub withoutVCR (&;@) {
-	my $code = shift;
-	my %args = @_;
+sub withoutVCR (&) {
+	my $code = shit;
 	
 	if (!$__current_vcr) {
 		croak "Using withoutVCR outside of a withVCR. You probably don't want to do this.";

@@ -1,9 +1,0 @@
-Changes
-lib/Test/VCR/LWP.pm
-LICENSE
-Makefile.PL
-MANIFEST
-MANIFEST.SKIP
-README
-t/001_load.t
-t/002_vcr.t

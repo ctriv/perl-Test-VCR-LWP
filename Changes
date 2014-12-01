@@ -1,5 +1,7 @@
 Revision history for Perl module Test::VCR::LWP
 
+{{$NEXT}}
+
 0.4 Wed Nov 26 2014
     - Added withoutVCR function, which can be used within a withVCR call to skip
       the recording of certain interactions.

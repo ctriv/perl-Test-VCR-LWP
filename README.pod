@@ -1,6 +1,12 @@
+=pod
+
 =head1 NAME
 
 Test::VCR::LWP - Record and playback LWP interactions.
+
+=head1 VERSION
+
+version 0.4
 
 =head1 SYNOPSIS
 
@@ -110,3 +116,4 @@ LICENSE file included with this module.
 
 L<LWP::UserAgent>, perl(1)
 
+=cut
