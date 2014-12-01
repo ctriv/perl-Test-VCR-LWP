@@ -267,7 +267,7 @@ Allows a section of a withVCR code block to skip recording.
 =cut
 
 sub withoutVCR (&) {
-	my $code = shit;
+	my $code = shift;
 	
 	if (!$__current_vcr) {
 		croak "Using withoutVCR outside of a withVCR. You probably don't want to do this.";
