@@ -1,6 +1,8 @@
 Revision history for Perl module Test::VCR::LWP
 
 {{$NEXT}}
+
+0.5 Thu Dec 04 2014
     - Moved build process over to Dist::Zilla.
     - Some minor doc tweaks.
     - Changed debug output to be more accurate.
