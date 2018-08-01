@@ -62,7 +62,7 @@ describe "A test recorder" => sub {
 			$sut->run(sub {
 				$ua->get('http://www.apple.com');		
 			});
-			file_contents_like('test.tape', qr/apple/i);
+			file_contents_like('test.tape', qr/apple\.com/i);
 		};
 		it "should record another thing" => sub {
 			$sut->run(sub {
@@ -94,7 +94,7 @@ describe "A test recorder" => sub {
 				$ua->get('http://www.apple.com');
 				$ua->get('http://search.cpan.org');		
 			});
-			file_contents_like('test.tape', qr/apple/i);
+			file_contents_like('test.tape', qr/apple\.com/i);
 			file_contents_like('test.tape', qr/cpan/i);				
 		};
 		it "should play a previously recorded thing" => sub {
@@ -109,7 +109,7 @@ describe "A test recorder" => sub {
 				$res = $ua->get('http://www.apple.com');
 			});
 			isa_ok($res, "HTTP::Response");
-			like($res->content, qr/apple/i);
+			like($res->content, qr/apple\.com/i);
 		};
 		it "should play previously recorded thingS." => sub {
 			my @res;
@@ -128,7 +128,7 @@ describe "A test recorder" => sub {
 			});
 			
 			isa_ok($res[0], "HTTP::Response");
-			like($res[0]->content, qr/apple/i);
+			like($res[0]->content, qr/apple\.com/i);
 			isa_ok($res[1], "HTTP::Response");
 			like($res[1]->content, qr/cpan/i);
 		};
@@ -237,7 +237,7 @@ describe "A test recorder" => sub {
 					$ua->get('http://www.apple.com');
 				};
 			} tape => 'bar.tape';
-			file_contents_unlike('bar.tape', qr/apple/i);
+			file_contents_unlike('bar.tape', qr/apple\.com/i);
 		};
 		it "should not interfere with wanted recording" => sub {
 			withVCR {
@@ -251,7 +251,7 @@ describe "A test recorder" => sub {
 			} tape => 'bar.tape';
 			
 			file_contents_like('bar.tape', qr/cpan/i);
-			file_contents_unlike('bar.tape', qr/apple/i);
+			file_contents_unlike('bar.tape', qr/apple\.com/i);
 		};
 		it "should throw a good error if called outside of a withVCR" => sub {
 			dies_ok {
